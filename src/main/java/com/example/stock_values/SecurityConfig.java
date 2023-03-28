@@ -45,7 +45,7 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(userDetails);
     }
 
-    //making register and getstockes api as public and the remaining subscribe api can only be accessed by user.
+    // subscribe api will require authentication and all other will be open.
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()

@@ -36,6 +36,7 @@ public class UserService {
         return "Subscribed";
     }
 
+
     public String registration(UserEntity user) {
         userRepository.save(user);
         return "User registered";

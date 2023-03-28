@@ -27,7 +27,8 @@ public class SubscriptionScheduler {
     @Autowired
     SubscriptionRepository subscriptionRepository;
 
-    @Scheduled(cron = "0 18 20 * * ?") // run at 4:50pm every day
+    //Schedules according to type of subscription
+    @Scheduled(cron = "0 00 12 * * ?") // run at 12pm every day
     public void sendDailySubscriptionEmails() {
         sendSubscriptionEmails(Notification.Daily);
     }
@@ -48,12 +49,12 @@ public class SubscriptionScheduler {
     }
 
 
-    //    //    //    //
+    //Sending Mail
     private void sendSubscriptionEmails(Notification frequency) {
         List<UserEntity> userList = userRepository.findAll();
         for (UserEntity user : userList) {
             List<String> subscriptionList = user.getSubscriptionList();
-            // Send email to each user
+            // Send email to users
             for (String sub : subscriptionList) {
                 SubscriptionEntity subscription = subscriptionRepository.findById(sub).get();
                 if (subscription.getNotification_frequency() == frequency) {

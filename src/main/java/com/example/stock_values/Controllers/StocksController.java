@@ -26,6 +26,7 @@ public class StocksController {
     UserService userService;
 
 
+    //for new user Registrations
     @PostMapping("/register")
     public String register(@RequestBody UserEntity user){
 
@@ -35,6 +36,7 @@ public class StocksController {
 
 
 
+    //For subscription
     @PostMapping("/subscribe")
     public String subscribe(@RequestParam String userId,String notificationFrequency,String stock){
         String x = userService.Subscribe(userId, notificationFrequency, stock);
@@ -45,6 +47,7 @@ public class StocksController {
 
 
 
+    //To get data of a specific stock according to date interval
     @GetMapping("/getStocks")//to get the data of a stock within specific dates
     public Mono<JsonNode> getStockData(@RequestParam String stockName,@RequestParam String startDate,@RequestParam String endDate) {
         WebClient client = WebClient.create("https://www.alphavantage.co/query");
